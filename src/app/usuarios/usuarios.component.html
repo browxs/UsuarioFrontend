@@ -1,10 +1,44 @@
-<p>
-  usuarios works!
-</p>
-
-<div *ngFor="let usuario of usuarios">
-  Nome: {{usuario.nome}}
-  <br>
-  Sobrenome: {{usuario.sobrenome}}
-  <hr>
+<div class="form-inline">
+  <div class="form-group mb-2">
+    <label class="mr-2">Filtro:</label><input type="text" class="form-control mr-2" placeholder="buscar"
+    [(ngModel)]="filtroNome">
+  </div>
 </div>
+<h3>Filtro: {{filtroNome}}</h3>
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th>Nome</th>
+      <th>Sobrenome</th>
+      <th>Email</th>
+      <th>Data Nascimento</th>
+      <th>Escolaridade</th>
+      <th>Opções</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="usuarios && usuarios.length">
+    <tr *ngFor="let usuario of usuariosFiltrados">
+      <td>{{usuario.nome}}</td>
+      <td>{{usuario.sobrenome}}</td>
+      <td>{{usuario.email}}</td>
+      <td>{{usuario.dataNascimento | DateTimeFormatPipe}}</td>
+      <td [ngSwitch]="usuario.escolaridade">
+        <div *ngSwitchCase=1>Fundamental</div>
+        <div *ngSwitchCase=2>Médio</div>
+        <div *ngSwitchCase=3>Superior</div>
+        <div *ngSwitchDefault>Infantil</div>
+      </td>
+      <td>
+        <button class="btn btn-success"></button>
+        <button class="btn btn-danger"></button>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot *ngIf="!usuarios.length">
+    <tr>
+      <td colspan="6" class="text-center">
+        <h3>Nenhum usuario encontrado</h3>
+      </td>
+    </tr>
+  </tfoot>
+</table>
