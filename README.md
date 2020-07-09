@@ -5,7 +5,7 @@ Projeto realizado em Angular CLI versão 10.0.1.
 - aplicação possibilita listar e filtrar os usuários cadastrados.
 - realizar cadastro, editar e excluir usuário.
 
-# Regras:
+# Regras
 - obrigatoriedade dos campos.
 - validação do email.
 - data de nascimento não pode ser maior que data atual.
