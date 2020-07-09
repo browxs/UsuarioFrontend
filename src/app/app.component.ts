@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Aplicativo de Controle de Usuário';
+  title = 'Controle de Usuário';
 }
