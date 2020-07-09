@@ -3,7 +3,11 @@ import { UsuarioService } from '../services/usuario.service';
 import { Usuario } from '../models/Usuario';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { FormGroup, FormControl, Validators, FormBuilder, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
-import { templateJitUrl } from '@angular/compiler';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+// import { ptBrLocale } from 'ngx-bootstrap/locale';
+// import { defineLocale } from 'ngx-bootstrap/chronos';
+
+// defineLocale('pt-br', ptBrLocale);
 
 @Component({
   selector: 'app-usuarios',
@@ -17,6 +21,7 @@ export class UsuariosComponent implements OnInit {
   usuario: Usuario;
   registerForm: FormGroup;
   bodyExcluirUsuario = '';
+  dataNascimento: Date;
 
   modoSalvar = 'post';
 
@@ -25,8 +30,11 @@ export class UsuariosComponent implements OnInit {
   constructor(
     private usuarioService: UsuarioService,
     private modalService: BsModalService,
-    private fb: FormBuilder
-  ) { }
+    private fb: FormBuilder,
+    // private localeService: BsLocaleService
+  ) {  
+    // this.localeService.use('pt-br');
+  }
   
   get filtroNome(): string {
     return this._filtroNome;
@@ -127,9 +135,10 @@ export class UsuariosComponent implements OnInit {
   }
 
   getUsuarios() {
+    
     this.usuarioService.getUsuario().subscribe(
-      (_usuarios: Usuario[]) => { 
-      this.usuarios = _usuarios; 
+      (_usuarios: Usuario[]) => {
+      this.usuarios = _usuarios;
       this.usuariosFiltrados = this.usuarios;
       console.log(_usuarios);
     }, error => {
